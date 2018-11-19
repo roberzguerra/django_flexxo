@@ -21,5 +21,8 @@ from blog import views as blog_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('blog/', blog_views.list, name='blog-list'),
+    path('blog/categorias', blog_views.list, name='blog-category-list'),
+    path('blog/categorias/novo', blog_views.new, name='blog-category-new'),
+    #path('blog/categorias/salvar', blog_views.save, name='blog-category-save'),
+    
 ]

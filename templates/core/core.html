@@ -17,6 +17,9 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+	{% block scripts_head %}
+	{% endblock scripts_head %}
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -40,9 +43,11 @@
 
 				<ul class="nav navbar-nav navbar-right">
                     {% comment %}
+						comentario com multiplas linhas
                         <li><a href="#">Login</a></li>
                         <li><a href="#">Register</a></li>
                     {% endcomment %}
+					{# comentario de uma linha #}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nome Usuario <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">

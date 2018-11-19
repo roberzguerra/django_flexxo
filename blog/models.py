@@ -5,6 +5,11 @@ from django.db import models
 class Category(models.Model):
     """
     Model para as categorias do blog
+    CRUD:
+    C = Create
+    R = Read
+    U = Update
+    D = Delete
     """
     name = models.CharField(max_length=255, blank=False, null=False, verbose_name="Nome")
     description = models.TextField(blank=False, verbose_name="Descrição")
@@ -17,6 +22,13 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Categoria"
         verbose_name_plural = "Categorias"
+
+    
+    def get_description_complete(self):
+        """
+        Exemplo de metodo dentro de um objeto Category.
+        """
+        return self.name + ":<br>" + self.description
 
     
 class Post(models.Model):

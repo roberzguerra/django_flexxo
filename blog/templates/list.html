@@ -1,1 +1,49 @@
-teste
+{% extends "core/core.html" %}
+
+{% block scripts_head %}
+<style type="text/css">
+    .container .panel-heading .btn-new {
+        float: right;
+        margin: -4px 0 0 0;
+    }
+</style>
+{% endblock scripts_head %}
+    
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Categorias
+                        <a class="btn btn-default btn-sm btn-new" href="{% url 'blog-category-new' %}">Novo</a>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Data Cadastro</th>
+                                <th>Opções</th>
+                            </thead>
+                            <tbody>
+                                {% for category in categories %}
+                                    <tr>
+                                        <td>{{ category.name }}</td>
+                                        <td>{{ category.description }}</td>
+                                        <td>{{ category.created_at|date:'d/m/Y' }}</td>
+                                        <td>
+                                            <button class="btn btn-default">Editar</button>
+                                            <button class="btn btn-danger">Deletar</button>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

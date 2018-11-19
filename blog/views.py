@@ -19,6 +19,8 @@ def list(request):
     return render(request, 'list.html', {'categories': categories})
 
 def new(request):
+
+    TESTE
     if request.POST:
         post = request.POST
         category = Category.objects.create(name=post.get('name'), description=post.get('description'))

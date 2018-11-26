@@ -10,7 +10,6 @@ def list(request):
     """
     categories = Category.objects.all()
 
-
     # De acordo com as configuracoes de templates no settings.py, 
     # primeiro o django verifica se existe dentro do diretorio templates do proprio app (app blog/templates)
     # SE NAO encontrar, procura no diretorio template na raiz do projeto blog/list.html
@@ -35,16 +34,20 @@ def new(request):
         if form.is_valid():
             
             category = form.save()
-            messages.success(request, 'Categoria criada.')
+
+            # Criando mensagem de sucesso, somando strings (forma menos usual)
+            messages.success(request, ('Categoria %s criada com sucesso.' % (category.name, )) )
+
             # Metodos para criar Messages:
             # messages.success(request, 'Profile details updated.')
             # messages.add_message(request, messages.SUCCESS, 'Registro cadastrado.')
 
             return redirect('blog-category-list')
 
-    #else:
-        #form = CategoryForm()
-    return render(request, 'form.html', {'form': form})
+    else:
+        # Para carregar valores pre definidos no Form
+        form = CategoryForm(initial={'name': '', 'description': '', 'created_at':''})
+    return render(request, 'form.html', {'form': form, 'form_url': form_url})
 
 def edit(request, id):
     """

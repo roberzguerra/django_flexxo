@@ -23,6 +23,7 @@ urlpatterns = [
 
     path('blog/categorias', blog_views.list, name='blog-category-list'),
     path('blog/categorias/novo', blog_views.new, name='blog-category-new'),
+    # Nao eh mais utilizado, a url acima supre esta abaixo.
     #path('blog/categorias/salvar', blog_views.save, name='blog-category-save'),
 
     path('blog/categorias/<int:id>', blog_views.edit, name='blog-category-edit'),

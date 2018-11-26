@@ -15,6 +15,7 @@
     
 {% block content %}
     <div class="container">
+    
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
@@ -26,6 +27,7 @@
                     <div class="panel-body">
                          <form action="{{ form_url }}" method="POST" id="form-category">
                             {% csrf_token %}
+                            
                             <div class="form-group">
                                 <label for="input-name">Nome</label>
                                 <input type="text" class="form-control" id="input-name" name="name" placeholder="Nome" value="{{ form.name.value }}">
@@ -37,7 +39,15 @@
                                 <div class="text-danger">{{form.errors.description|striptags }}</div>
                             </div>
                             
-                            {% comment %} {{form.as_p}} {% endcomment %}
+                            {% comment %}                             
+                            <div class="form-group">
+                                <label for="input-crated-at">Data cadastro</label>
+                                <input type="text" class="form-control" id="input-created-at" name="created_at" placeholder="Data cadastro" value="{{ form.created_at.value }}" readonly>
+                                <div class="text-danger">{{form.errors.name|striptags }}</div>
+                            </div>
+                             {% endcomment %}
+                            
+                            {% comment %} {{ form.as_p }} {% endcomment %}
                             {% comment %} {{form.as_table}} {% endcomment %}
                         </form>
                         {% comment %}

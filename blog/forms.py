@@ -6,11 +6,15 @@ from blog.models import Category
 #6 - ModelForm completo
 class CategoryForm(forms.ModelForm):
     
-    #created_at = forms.CharField(label='Cadastrado em', widget=forms.TextInput(attrs={'readonly': True}))
+    # Exemplo de campo customizado do form
+    created_at = forms.CharField(label='Cadastrado em', widget=forms.TextInput(attrs={'readonly': True}))
 
     class Meta:
         model = Category
         fields = '__all__'
+
+        # Declara quais campos do MODEL deste formulario deverao ser exibidos em tela.
+        #fields = ('name', 'description', )
         #exclude = ('created_at', 'updated_at')
 
     def clean(self):

@@ -24,5 +24,8 @@ urlpatterns = [
     path('blog/categorias', blog_views.list, name='blog-category-list'),
     path('blog/categorias/novo', blog_views.new, name='blog-category-new'),
     #path('blog/categorias/salvar', blog_views.save, name='blog-category-save'),
+
+    path('blog/categorias/<int:id>', blog_views.edit, name='blog-category-edit'),
+    path('blog/categorias/remover', blog_views.delete, name='blog-category-delete'),
     
 ]

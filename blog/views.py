@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect, reverse
+from django.contrib import messages
 from blog.models import Category
+from blog.forms import CategoryForm
 
 def list(request):
-    #question = get_object_or_404(Question, pk=question_id)
-
+    """
+    Metodo para listagem de todas as categorias.
+    """
     categories = Category.objects.all()
 
 
@@ -18,17 +21,70 @@ def list(request):
     # utilizando o template do proprio diretorio templates do app blog
     return render(request, 'list.html', {'categories': categories})
 
+
 def new(request):
+    """
+    Metodo para abrir a pagina de cadastro.
+    E cadastrar 
+    """
+    form_url = reverse('blog-category-new')
+    form = None
+    if request.POST:
+
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            
+            category = form.save()
+            return redirect('blog-category-list')
+
+    #else:
+        #form = CategoryForm()
+    return render(request, 'form.html', {'form': form})
+
+def edit(request, id):
+    """
+    Metodo utilizado para editar/alterar o
+    """
+    # Busca normal do registro:
+    #category = Category.objects.get(pk=id);
+
+    # Busca com exception 404, se nao encontrar exibe erro 404
+    category = get_object_or_404(Category, pk=id)
+    form = CategoryForm(None, instance=category)
 
     if request.POST:
-        post = request.POST
-        category = Category.objects.create(name=post.get('name'), description=post.get('description'))
-        return redirect('blog-category-list')
+
+        form = CategoryForm(request.POST, instance=category)
+        
+        if form.is_valid():
+            
+            category = form.save()
+            return redirect('blog-category-list')
+
+    form_url = reverse('blog-category-edit', args=(category.id, ))
     
-    return render(request, 'new.html', {})
+    return render(request, 'form.html', {'category': category, 'form': form, 'form_url': form_url})
 
 
+def delete(request):
 
+    category = get_object_or_404(Category, pk=request.POST.get('id'))
+    if category:
+        category.delete()
+
+    return redirect('blog-category-list')
+
+# def new(request):
+#     """
+#     Metodo para abrir a pagina de cadastro.
+#     E cadastrar 
+#     """
+#     if request.POST:
+#         post = request.POST
+#         category = Category.objects.create(name=post.get('name'), description=post.get('description'))
+#         return redirect('blog-category-list')
+    
+#     return render(request, 'new.html', {})
 
 # Utilizando metodos separados para exibir a pagina de cadastro e cadastrar efetivamente:
 # def new(request):
@@ -39,4 +95,3 @@ def new(request):
 #         post = request.POST
 #         category = Category.objects.create(name=post.get('name'), description=post.get('description'))
 #     return redirect('blog-category-list')
-    

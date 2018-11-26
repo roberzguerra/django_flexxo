@@ -1,0 +1,78 @@
+{% extends "core/core.html" %}
+
+{% block scripts_head %}
+<style type="text/css">
+    .container .panel-heading .btn-back {
+        float: right;
+        margin: -4px 0 0 0;
+    }
+
+    .panel .panel-footer .btn-delete {
+        float: right;
+    }
+</style>
+{% endblock scripts_head %}
+    
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Nova Categorias
+                        <a class="btn btn-default btn-sm btn-back" href="{% url 'blog-category-list' %}">Voltar</a>
+                    </div>
+
+                    <div class="panel-body">
+                         <form action="{{ form_url }}" method="POST" id="form-category">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="input-name">Nome</label>
+                                <input type="text" class="form-control" id="input-name" name="name" placeholder="Nome" value="{{ form.name.value }}">
+                                <div class="text-danger">{{form.errors.name|striptags }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="text-description">Descrição</label>
+                                <textarea id="text-description" class="form-control" rows="3" name="description">{{ form.description.value }}</textarea>
+                                <div class="text-danger">{{form.errors.description|striptags }}</div>
+                            </div>
+                            
+                            {% comment %} {{form.as_p}} {% endcomment %}
+                            {% comment %} {{form.as_table}} {% endcomment %}
+                        </form>
+                        {% comment %}
+                        <form action="{% url 'blog-category-new' %}" method="POST" id="form-category">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="input-name">Nome</label>
+                                <input type="text" class="form-control" id="input-name" name="name" placeholder="Nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="text-description">Descrição</label>
+                                <textarea id="text-description" class="form-control" rows="3" name="description"></textarea>
+                            </div>
+                        </form>
+                        {% endcomment %}
+                        <form id="form-category-delete" action="{% url 'blog-category-delete' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ category.pk }}" />
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" form="form-category" class="btn btn-success btn-save">Salvar</a>
+                        <button type="submit" form="form-category-delete" class="btn btn-danger btn-delete">Remover</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %} 
+    {# Para debugar #}
+    <pre>
+        {% filter force_escape %}
+            {% debug form %}
+        {% endfilter %}
+    </pre>
+     {% endcomment %}
+{% endblock content %}

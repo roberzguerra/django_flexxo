@@ -34,8 +34,8 @@
                                         <td>{{ category.description }}</td>
                                         <td>{{ category.created_at|date:'d/m/Y' }}</td>
                                         <td>
-                                            <button class="btn btn-default">Editar</button>
-                                            <button class="btn btn-danger">Deletar</button>
+                                            <a class="btn btn-default" href="{% url 'blog-category-edit' category.id %}">Editar</button>
+                                            {% comment %} <button class="btn btn-danger">Deletar</button> {% endcomment %}
                                     </tr>
                                 {% endfor %}
                             </tbody>

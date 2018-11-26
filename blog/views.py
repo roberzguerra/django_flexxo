@@ -35,6 +35,11 @@ def new(request):
         if form.is_valid():
             
             category = form.save()
+            messages.success(request, 'Categoria criada.')
+            # Metodos para criar Messages:
+            # messages.success(request, 'Profile details updated.')
+            # messages.add_message(request, messages.SUCCESS, 'Registro cadastrado.')
+
             return redirect('blog-category-list')
 
     #else:
@@ -59,6 +64,7 @@ def edit(request, id):
         if form.is_valid():
             
             category = form.save()
+            messages.success(request, 'Categoria alterada.')
             return redirect('blog-category-list')
 
     form_url = reverse('blog-category-edit', args=(category.id, ))
@@ -71,6 +77,7 @@ def delete(request):
     category = get_object_or_404(Category, pk=request.POST.get('id'))
     if category:
         category.delete()
+        messages.success(request, 'Categoria removida.')
 
     return redirect('blog-category-list')
 
@@ -83,7 +90,6 @@ def delete(request):
 #         post = request.POST
 #         category = Category.objects.create(name=post.get('name'), description=post.get('description'))
 #         return redirect('blog-category-list')
-    
 #     return render(request, 'new.html', {})
 
 # Utilizando metodos separados para exibir a pagina de cadastro e cadastrar efetivamente:

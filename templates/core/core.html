@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +37,9 @@
 
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Categorias</a></li>
-					<li><a href="#">Produtos</a></li>
+					<li><a href="{% url 'core-home' %}">Home</a></li>
+					<li><a href="{% url 'blog-category-list' %}">Categorias</a></li>
+					{% comment %} <li><a href="#">Posts</a></li> {% endcomment %}
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -67,7 +68,8 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
+	<script src="{% static 'core/js/sweetalert2.all.min.js' %}"></script>
+
 	{% comment %} 
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -75,5 +77,8 @@
 	}); 
 	</script>
 	{% endcomment %}
+
+	{% block scripts_end %}
+	{% endblock scripts_end %}
 </body>
 </html>

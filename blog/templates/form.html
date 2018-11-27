@@ -70,7 +70,10 @@
                     </div>
                     <div class="panel-footer">
                         <button type="submit" form="form-category" class="btn btn-success btn-save">Salvar</a>
-                        <button type="submit" form="form-category-delete" class="btn btn-danger btn-delete">Remover</a>
+
+                        {% if category.pk %}
+                            <button type="submit" id="btn-category-delete" class="btn btn-danger btn-delete">Remover</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -86,3 +89,37 @@
     </pre>
      {% endcomment %}
 {% endblock content %}
+
+
+{% block scripts_end %}
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        
+        var $btnDelete = $('#btn-category-delete');
+        var $formDelete = $('#form-category-delete');
+
+        $btnDelete.on('click', function() {
+            
+            swal({
+                //title: 'Are you sure?',
+                text: "Deseja remover o registro?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, deletar!',
+                cancelButtonText: 'Cancelar'
+            }).then(function(result) {
+                if (result.value) {
+                    $formDelete.submit();
+                }
+            });
+        });
+
+        
+        
+    });
+</script>
+{% endblock scripts_end %}

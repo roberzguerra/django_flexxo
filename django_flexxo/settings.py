@@ -128,5 +128,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+# diretorio dos arquivos estaticos:
+#   /static/core/js para javascripts
+#   /static/core/css para CSS
+#   /static/core/images para imagens
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    #'/var/www/static/',
+]
 
 STATIC_URL = '/static/'
+
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = STATIC_URL + "media/"
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip("/").split("/"))

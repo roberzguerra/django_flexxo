@@ -59,7 +59,7 @@ def edit(request, id):
     # Busca com exception 404, se nao encontrar exibe erro 404
     category = get_object_or_404(Category, pk=id)
     form = CategoryForm(None, instance=category)
-
+    
     if request.POST:
 
         form = CategoryForm(request.POST, instance=category)
@@ -72,15 +72,14 @@ def edit(request, id):
 
     form_url = reverse('blog-category-edit', args=(category.id, ))
     
-    return render(request, 'form.html', {'category': category, 'form': form, 'form_url': form_url})
+    return render(request, 'form.html', {'category': category, 'form': form, 'form_url': form_url, })
 
 
 def delete(request):
 
     category = get_object_or_404(Category, pk=request.POST.get('id'))
-    if category:
-        category.delete()
-        messages.success(request, 'Categoria removida.')
+    category.delete()
+    messages.success(request, 'Categoria removida.')
 
     return redirect('blog-category-list')
 

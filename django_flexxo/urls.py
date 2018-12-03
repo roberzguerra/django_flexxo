@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """django_flexxo URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -14,13 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from core import views as core_views
 from blog import views as blog_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Unclui urls do modulo auth
+    path('contas/', include('accounts.urls', namespace='accounts')),
+    path('contas/', include('django.contrib.auth.urls')),
+
 
     path('', core_views.home, name='core-home'),
 

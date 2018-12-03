@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Aqui eu referencio os modulos criados
+    'accounts.apps.AccountsConfig',
     'blog',
 ]
 
@@ -137,6 +138,8 @@ STATICFILES_DIRS = [
     #'/var/www/static/',
 ]
 
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
 
 
@@ -148,3 +151,7 @@ MEDIA_URL = STATIC_URL + "media/"
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip("/").split("/"))
+
+# Configuracoes do Django Auth
+LOGIN_REDIRECT_URL = 'core-home'
+LOGOUT_REDIRECT_URL = 'core-home'

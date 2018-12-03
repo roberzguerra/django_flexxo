@@ -152,6 +152,12 @@ MEDIA_URL = STATIC_URL + "media/"
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip("/").split("/"))
 
+
 # Configuracoes do Django Auth
 LOGIN_REDIRECT_URL = 'core-home'
 LOGOUT_REDIRECT_URL = 'core-home'
+
+
+# Configuracoes para envio de Email
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

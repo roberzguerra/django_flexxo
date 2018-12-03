@@ -3,3 +3,5 @@ __pycache__
 .idea
 .code
 .vscode
+sent_emails/*
+!sent_emails/.gitkeep

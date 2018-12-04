@@ -27,7 +27,6 @@ urlpatterns = [
     path('contas/', include('accounts.urls', namespace='accounts')),
     path('contas/', include('django.contrib.auth.urls')),
 
-
     path('', core_views.home, name='core-home'),
 
     path('blog/categorias', blog_views.list, name='blog-category-list'),
